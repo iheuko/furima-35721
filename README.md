@@ -15,7 +15,6 @@
 ### Association
 
 - has_many :items
-- has_many :residences
 - has_many :purchases
 
 
@@ -35,8 +34,7 @@
 
 ### Association
 
-- has_one    :purchase
-- belongs_to :residence
+- belongs_to :purchase
 - belongs_to :user
 
 
@@ -51,12 +49,11 @@
 | municipality  | string     | null: false                    |
 | phone_number  | string     | null: false                    |
 | building_name | string     | null: true                     |
-| user          | references | null: false, foreign_key: true |
+| purchase      | references | null: false, foreign_key: true |
 
 ### Association
-- has_many   :purchases
-- has_many   :item
-- belongs_to :user
+
+- belongs_to purchase
 
 
 ## purchases テーブル
@@ -70,5 +67,5 @@
 ### Association
 
 - belongs_to :user
-- belongs_to :item
-- belongs_to :residence
+- has_many   :items
+- has_one :residence
