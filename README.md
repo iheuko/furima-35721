@@ -8,7 +8,7 @@
 | last_name_katakana   | string | null: false  |
 | first_name           | string | null: false  |
 | first_name_katakana  | string | null: false  |
-| birthday             | int    | null: false  |  
+| birthday             | date   | null: false  |  
 | email                | string | unique: true |
 | encrypted_password   | string | null: false  |
 
@@ -34,7 +34,7 @@
 
 ### Association
 
-- belongs_to :purchase
+- has_one    :purchase
 - belongs_to :user
 
 
@@ -62,10 +62,9 @@
 | ---------- | ---------- | ------------------------------ |
 | user       | references | null: false, foreign_key: true |
 | room       | references | null: false, foreign_key: true |
-| residences | references | null: false, foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_many   :items
+- belongs_to :item
 - has_one :residence
