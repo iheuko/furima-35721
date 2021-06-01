@@ -2,15 +2,16 @@
 
 ## users テーブル
 
-| Column               | Type   | Options      |
-| -------------------  | ------ | ------------ |
-| last_name            | string | null: false  |
-| last_name_katakana   | string | null: false  |
-| first_name           | string | null: false  |
-| first_name_katakana  | string | null: false  |
-| birthday             | date   | null: false  |  
-| email                | string | unique: true |
-| encrypted_password   | string | null: false  |
+| Column               | Type   | Options                  |
+| -------------------  | ------ | ------------------------ |
+| last_name            | string | null: false              |
+| last_name_katakana   | string | null: false              |
+| first_name           | string | null: false              |
+| first_name_katakana  | string | null: false              |
+| nickname             | string | null: false              |
+| birthday             | date   | null: false              |  
+| email                | string | unique: true, null: false|
+| encrypted_password   | string | null: false              |
 
 ### Association
 
@@ -20,17 +21,17 @@
 
 ## items テーブル
 
-| Column              | Type       | Options                        |
-| ------------------- | ---------- | ------------------------------ |
-| item_name           | string     | null: false                    |
-| message             | text       | null: false                    |
-| price               | int        | null: false                    |
-| category_id         | int        | null: false                    | 
-| item_status_id      | int        | null: false                    |
-| burden_id           | int        | null: false                    |
-| shipment_source_id  | int        | null: false                    |
-| shipping_days_id    | int        | null: false                    |
-| user                | references | null: false, foreign_key: true |
+| Column              | Type           | Options                        |
+| ------------------- | -------------- | ------------------------------ |
+| item_name           | string         | null: false                    |
+| message             | text           | null: false                    |
+| price               | integer        | null: false                    |
+| category_id         | integer        | null: false                    | 
+| item_status_id      | integer        | null: false                    |
+| burden_id           | integer        | null: false                    |
+| state_id            | integer        | null: false                    |
+| shipping_day_id     | integer        | null: false                    |
+| user                | references     | null: false, foreign_key: true |
 
 ### Association
 
@@ -42,7 +43,7 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| state         | string     | null: false                    |
+| state_id      | integer    | null: false                    |
 | city          | string     | null: false                    |
 | address_line  | string     | null: false                    |
 | postal_code   | string     | null: false                    |
@@ -61,7 +62,7 @@
 | Column     | Type       | Options                        |
 | ---------- | ---------- | ------------------------------ |
 | user       | references | null: false, foreign_key: true |
-| room       | references | null: false, foreign_key: true |
+| item       | references | null: false, foreign_key: true |
 
 ### Association
 
