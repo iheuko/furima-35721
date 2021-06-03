@@ -19,7 +19,7 @@ class User < ApplicationRecord
    validates :first_name_katakana
   end
 
-   with_options presence: true, format: { with: /\A[a-z0-9]+\z/ } do
+   with_options presence: true, format: { with: /\A[a-zA-Z0-9]+\z/ } do
     validates :password
     validates :password_confirmation
   end  
