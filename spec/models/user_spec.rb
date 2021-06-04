@@ -47,7 +47,7 @@ RSpec.describe User, type: :model do
         it 'password_confirmationが空では登録できないこと' do
           @user.password_confirmation = ''
           @user.valid?
-          expect(@user.errors.full_messages).to include("Password confirmation can't be blank")
+          expect(@user.errors.full_messages).to include("Password confirmation is invalid")
         end
 
         it 'passwordが英字のみでは登録できないこと' do
