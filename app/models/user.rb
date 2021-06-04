@@ -5,11 +5,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   
-  validates :nickname, presence: true
-  validates :birthday, presence: true
   validates :email, presence: true, uniqueness: true
+
+  with_options presence: true do
+    validates :nickname, presence: true
+    validates :birthday, presence: true
+  end
       
-  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/ } do
+  with_options presence: true, format: { with: /\A[ぁ-んァ-ン一-龥ー]+\z/ } do
    validates :last_name 
    validates :first_name
   end
@@ -19,7 +22,7 @@ class User < ApplicationRecord
    validates :first_name_katakana
   end
 
-   with_options presence: true, format: { with: /\A[a-zA-Z0-9]+\z/ } do
+   with_options presence: true, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i } do
     validates :password
     validates :password_confirmation
   end  
