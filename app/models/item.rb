@@ -13,7 +13,6 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :item_name
     validates :message
-    validates :price
   end
 
   with_options numericality: { other_than: 1 },  presence: true do
