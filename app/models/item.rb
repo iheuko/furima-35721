@@ -8,9 +8,7 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  with_options presence: true do
-    validates :price
-  end
+  validates_inclusion_of :price, in:300..9999999, presence: true, format: { with: /\A(?=.*?\d)+\z/ } 
 
   with_options presence: true do
     validates :item_name
