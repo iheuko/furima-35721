@@ -11,8 +11,41 @@ RSpec.describe Item, type: :model do
         it '画像を選択することと正しく入力すれば出品できること' do
           expect(@item).to be_valid
         end
+
+        it '販売価格は3桁で出品できる' do
+          @item.price = '321'
+          expect(@item).to be_valid
+        end
+
+        it '販売価格は4桁で出品できる' do
+          @item.price = '4321'
+          expect(@item).to be_valid
+        end
+
+        it '販売価格は5桁で出品できる' do
+          @item.price = '54321'
+          expect(@item).to be_valid
+        end
+
+        it '販売価格は6桁で出品できる' do
+          @item.price = '654321'
+          expect(@item).to be_valid
+        end
+
+        it '販売価格は7桁で出品できる' do
+          @item.price = '7654321'
+          expect(@item).to be_valid
+        end
       end
+
       context '出品できない場合' do
+        it '画像が空では出品できない' do
+          @item.image = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Image can't be blank")
+        end
+
+
         it '商品名がなければ出品できない' do
           @item.item_name = ''
           @item.valid?
@@ -89,31 +122,37 @@ RSpec.describe Item, type: :model do
         it '販売価格情報がなければ出品できない' do
           @item.price = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is not included in the list")
+          expect(@item.errors.full_messages).to include("Price is not a number")
         end
 
         it '販売価格は¥300を下回る場合出品できない' do
           @item.price = '299'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is not included in the list")
+          expect(@item.errors.full_messages).to include("Price must be greater than 299")
         end
 
         it '販売価格は¥9999999を上回る場合出品できない' do
           @item.price = '100000000'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is not included in the list")
+          expect(@item.errors.full_messages).to include("Price must be less than 9999999")
         end
 
-        it '販売価格は半角数字のみでなければ出品できない' do
+        it '販売価格は全角数字では出品できない' do
           @item.price = '３００'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is not included in the list")
+          expect(@item.errors.full_messages).to include("Price is not a number")
+        end
+
+        it '販売価格は半角英数字混合は出品できない' do
+          @item.price = '300a'
+          @item.valid?
+          expect(@item.errors.full_messages).to include("Price is not a number")
         end
 
         it '販売価格は数字のみでなければ出品できない' do
           @item.price = 'あああ'
           @item.valid?
-          expect(@item.errors.full_messages).to include("Price is not included in the list")
+          expect(@item.errors.full_messages).to include("Price is not a number")
         end
       end  
     end

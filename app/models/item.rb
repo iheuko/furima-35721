@@ -8,11 +8,12 @@ class Item < ApplicationRecord
   belongs_to :user
   has_one_attached :image
 
-  validates_inclusion_of :price, in:300..9999999, presence: true, format: { with: /\A(?=.*?\d)+\z/ } 
+  validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 9999999  }
 
   with_options presence: true do
     validates :item_name
     validates :message
+    validates :image
   end
 
   with_options numericality: { other_than: 1 },  presence: true do
