@@ -61,7 +61,7 @@ RSpec.describe Item, type: :model do
         it 'カテゴリー情報がなければ出品できない' do
           @item.category_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Category can't be blank")
+          expect(@item.errors.full_messages).to include("Category is not a number")
         end
 
         it 'カテゴリー情報のidが1であれば出品できない' do
@@ -73,7 +73,7 @@ RSpec.describe Item, type: :model do
         it '商品の状態情報がなければ出品できない' do
           @item.item_status_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Item status can't be blank")
+          expect(@item.errors.full_messages).to include("Item status is not a number")
         end
 
         it '商品の状態情報のidが1であれば出品できない' do
@@ -85,7 +85,7 @@ RSpec.describe Item, type: :model do
         it '配送料の負担情報がなければ出品できない' do
           @item.burden_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Burden can't be blank")
+          expect(@item.errors.full_messages).to include("Burden is not a number")
         end
 
         it '配送料の負担情報のidが1であれば出品できない' do
@@ -97,7 +97,7 @@ RSpec.describe Item, type: :model do
         it '配送元の地域情報がなければ出品できない' do
           @item.state_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("State can't be blank")
+          expect(@item.errors.full_messages).to include("State is not a number")
         end
 
         it '配送元の地域情報のidが1であれば出品できない' do
@@ -109,7 +109,7 @@ RSpec.describe Item, type: :model do
         it '配送までの日数情報がなければ出品できない' do
           @item.shipping_day_id = ''
           @item.valid?
-          expect(@item.errors.full_messages).to include("Shipping day can't be blank")
+          expect(@item.errors.full_messages).to include("Shipping day is not a number")
         end
 
         it '配送までの日数情報のidが1であれば出品できない' do
@@ -153,6 +153,12 @@ RSpec.describe Item, type: :model do
           @item.price = 'あああ'
           @item.valid?
           expect(@item.errors.full_messages).to include("Price is not a number")
+        end
+
+        it 'userが紐付いていなければ出品できない' do
+          @item.user = nil
+          @item.valid?
+          expect(@item.errors.full_messages).to include('User must exist')
         end
       end  
     end
