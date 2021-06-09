@@ -13,27 +13,27 @@ RSpec.describe Item, type: :model do
         end
 
         it '販売価格は3桁で出品できる' do
-          @item.price = '321'
+          @item.price = 321
           expect(@item).to be_valid
         end
 
         it '販売価格は4桁で出品できる' do
-          @item.price = '4321'
+          @item.price = 4321
           expect(@item).to be_valid
         end
 
         it '販売価格は5桁で出品できる' do
-          @item.price = '54321'
+          @item.price = 54321
           expect(@item).to be_valid
         end
 
         it '販売価格は6桁で出品できる' do
-          @item.price = '654321'
+          @item.price = 654321
           expect(@item).to be_valid
         end
 
         it '販売価格は7桁で出品できる' do
-          @item.price = '7654321'
+          @item.price = 7654321
           expect(@item).to be_valid
         end
       end
@@ -65,7 +65,7 @@ RSpec.describe Item, type: :model do
         end
 
         it 'カテゴリー情報のidが1であれば出品できない' do
-          @item.category_id = '1'
+          @item.category_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Category must be other than 1")
         end
@@ -77,7 +77,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '商品の状態情報のidが1であれば出品できない' do
-          @item.item_status_id = '1'
+          @item.item_status_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Item status must be other than 1")
         end
@@ -89,7 +89,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '配送料の負担情報のidが1であれば出品できない' do
-          @item.burden_id = '1'
+          @item.burden_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Burden must be other than 1")
         end
@@ -101,7 +101,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '配送元の地域情報のidが1であれば出品できない' do
-          @item.state_id = '1'
+          @item.state_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("State must be other than 1")
         end
@@ -113,7 +113,7 @@ RSpec.describe Item, type: :model do
         end
 
         it '配送までの日数情報のidが1であれば出品できない' do
-          @item.shipping_day_id = '1'
+          @item.shipping_day_id = 1
           @item.valid?
           expect(@item.errors.full_messages).to include("Shipping day must be other than 1")
         end
@@ -126,13 +126,13 @@ RSpec.describe Item, type: :model do
         end
 
         it '販売価格は¥300を下回る場合出品できない' do
-          @item.price = '299'
+          @item.price = 299
           @item.valid?
           expect(@item.errors.full_messages).to include("Price must be greater than 299")
         end
 
         it '販売価格は¥9999999を上回る場合出品できない' do
-          @item.price = '100000000'
+          @item.price = 100000000
           @item.valid?
           expect(@item.errors.full_messages).to include("Price must be less than 9999999")
         end
