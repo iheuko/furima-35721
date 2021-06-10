@@ -7,6 +7,7 @@ class Item < ApplicationRecord
   belongs_to :shipping_day
   belongs_to :user
   has_one_attached :image
+  has_one    :order
 
   validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 9999999 }
 
