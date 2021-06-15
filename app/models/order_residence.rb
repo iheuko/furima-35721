@@ -6,7 +6,7 @@ class OrderResidence
 
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/ }
-    validates :phone_number, format: { with: /\A\d{11}\z/ }
+    validates :phone_number, format: { with: /\A\d{1,11}\z/ }
     validates :city
     validates :address_line
     validates :token
