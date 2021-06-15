@@ -1,4 +1,5 @@
 class OrdersController < ApplicationController
+  before_action :redirect_root
   def index
     @item = Item.find(params[:item_id])
     @order_residence = OrderResidence.new
@@ -31,5 +32,15 @@ class OrdersController < ApplicationController
       card: order_params[:token],    # カードトークン
       currency: 'jpy' 
     )
+  end
+
+  def redirect_root
+    item = Item.find(params[:item_id])
+    if !user_signed_in?
+      redirect_to root_path
+
+    elsif item.order.nil?
+      redirect_to root_path
+    end
   end
 end
