@@ -13,7 +13,7 @@ RSpec.describe OrderResidence, type: :model do
         end
 
         it 'building_nameが空でも購入できる' do
-          building_name =''
+          building_name = ''
           expect(@order_residence).to be_valid
         end
 
@@ -29,6 +29,12 @@ RSpec.describe OrderResidence, type: :model do
           @order_residence.state_id  = ''
           @order_residence.valid?
           expect(@order_residence.errors.full_messages).to include("State is not a number")
+        end
+
+        it 'state_idが1では購入できない' do
+          @order_residence.state_id  = '1'
+          @order_residence.valid?
+          expect(@order_residence.errors.full_messages).to include("State must be other than 1")
         end
 
         it 'cityが空では購入できない' do
@@ -67,16 +73,34 @@ RSpec.describe OrderResidence, type: :model do
           expect(@order_residence.errors.full_messages).to include("Phone number can't be blank")
         end
 
-        it 'phone_numberは12文字以上では購入できない' do
+        it 'phone_numberが12文字以上では購入できない' do
           @order_residence.phone_number = '123456789012'
           @order_residence.valid?
           expect(@order_residence.errors.full_messages).to include("Phone number is invalid")
         end
 
-        it 'phone_numberは全角では購入できない' do
+        it 'phone_numberが全角では購入できない' do
           @order_residence.phone_number = '１２３４５６７８９０１'
           @order_residence.valid?
           expect(@order_residence.errors.full_messages).to include("Phone number is invalid")
+        end
+
+        it 'phone_numberが英数字混合では登録できない' do
+          @order_residence.phone_number = '123456aaaaa'
+          @order_residence.valid?
+          expect(@order_residence.errors.full_messages).to include("Phone number is invalid")
+        end
+
+        it 'user_idが空では登録できないこと' do
+          @order_residence.user_id = ''
+          @order_residence.valid?
+          expect(@order_residence.errors.full_messages).to include("User can't be blank")
+        end
+
+        it 'item_idが空では登録できないこと' do
+          @order_residence.item_id = ''
+          @order_residence.valid?
+          expect(@order_residence.errors.full_messages).to include("Item can't be blank")
         end
       end
     end

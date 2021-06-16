@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :redirect_root
   def index
-    @item = Item.find(params[:item_id])
+    item_find
     @order_residence = OrderResidence.new
   end
 
@@ -12,7 +12,7 @@ class OrdersController < ApplicationController
       @order_residence.save
       redirect_to root_path
     else
-      @item = Item.find(params[:item_id])
+      item_find
       render :index
     end
   end
@@ -36,11 +36,12 @@ class OrdersController < ApplicationController
 
   def redirect_root
     item = Item.find(params[:item_id])
-    if !user_signed_in?
-      redirect_to root_path
-
-    elsif item.order.nil?
+    if !user_signed_in? || item.order.nil?
       redirect_to root_path
     end
+  end
+
+  def item_find
+    @item = Item.find(params[:item_id])
   end
 end

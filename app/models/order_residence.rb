@@ -10,6 +10,8 @@ class OrderResidence
     validates :city
     validates :address_line
     validates :token
+    validates :user_id
+    validates :item_id
   end
 
   def save
