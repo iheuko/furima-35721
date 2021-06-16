@@ -3,7 +3,9 @@ require 'rails_helper'
 RSpec.describe OrderResidence, type: :model do
   describe '#create' do
     before do
-      @order_residence = FactoryBot.build(:order_residence)
+      user = FactoryBot.build(:user)
+      item = FactoryBot.build(:item) 
+      @order_residence = FactoryBot.build(:order_residence, user_id: user, item_id: item)
     end
 
     describe '商品購入機能' do
@@ -24,6 +26,11 @@ RSpec.describe OrderResidence, type: :model do
       end
 
       context '購入できない場合' do
+        it 'tokenが空では購入できない' do
+          @order_residence.token  = ''
+          @order_residence.valid?
+          expect(@order_residence.errors.full_messages).to include("Token can't be blank")
+        end
 
         it 'state_idが空では購入できない' do
           @order_residence.state_id  = ''
