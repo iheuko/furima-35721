@@ -39,7 +39,7 @@ RSpec.describe OrderResidence, type: :model do
         end
 
         it 'state_idが1では購入できない' do
-          @order_residence.state_id  = '1'
+          @order_residence.state_id  = 1
           @order_residence.valid?
           expect(@order_residence.errors.full_messages).to include("State must be other than 1")
         end
