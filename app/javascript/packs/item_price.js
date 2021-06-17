@@ -3,7 +3,7 @@ window.addEventListener("load", function(){
 
   priceInput.addEventListener("input", () => {
     const addTaxDom = document.getElementById("add-tax-price");
-    addTaxDom.innerHTML = priceInput.value / 10;
+    addTaxDom.innerHTML = Math.floor(priceInput.value / 10);
 
     const addProfitDom = document.getElementById("profit");
     addProfitDom.innerHTML = priceInput.value - addTaxDom.innerHTML
