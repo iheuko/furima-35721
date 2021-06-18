@@ -9,7 +9,7 @@ class Item < ApplicationRecord
   has_one_attached :image
   has_one    :order
 
-  validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 9999999 }
+  validates :price, numericality: { only_integer: true, greater_than: 299, less_than: 10000000 }
 
   with_options presence: true do
     validates :item_name
